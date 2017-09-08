@@ -1,0 +1,8 @@
+<div class="gallery" ng-show="product.images.length">
+  <img class="gallery__current" ng-src="{{product.images[gallery.current]}}" />
+  <ul class="gallery__content" ng-show="false">
+    <li class="gallery__image" class="" ng-repeat="image in product.images">
+      <img ng-src="{{image}}" />
+    </li>
+  </ul>
+</div>

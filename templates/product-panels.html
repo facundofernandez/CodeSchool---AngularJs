@@ -1,13 +1,6 @@
-<div class="gallery" ng-show="product.images.length" ng-controller="GalleryController as gallery">
-  <img class="gallery__current" ng-src="{{product.images[gallery.current]}}" />
-  <ul class="gallery__content" ng-show="false">
-    <li class="gallery__image" class="" ng-repeat="image in product.images">
-      <img ng-src="{{image}}" />
-    </li>
-  </ul>
-</div>
+<product-gallery></product-gallery>
 <!-- End Gallery -->
-<div class="panel" ng-controller="PanelController as panel">
+<div class="panel">
   <ul class="panel__nav">
     <li class="panel__nav-item" ng-class="{ active: panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
     <li class="panel__nav-item" ng-class="{ active: panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specification</a></li>

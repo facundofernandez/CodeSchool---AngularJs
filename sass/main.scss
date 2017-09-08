@@ -9,11 +9,16 @@ body{
 }
 
 #app{
+  width: 100%;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  //justify-content: space-between;
 }
 
-.product{align-self:flex-start;
+.product{
+  //align-self:flex-start;
   width: 33%;
   padding:30px;
   box-shadow: 0px 0px 10px 1px rgba(grey,.3);
