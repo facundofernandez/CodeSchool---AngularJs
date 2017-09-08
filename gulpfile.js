@@ -7,7 +7,8 @@ var gulp          = require('gulp'),
 
 gulp.task('server', function(){
     browserSync.init({
-        server: "./"
+      server: "./",
+      port: 4444
     });
 
     gulp.watch("*.html").on('change', reload);

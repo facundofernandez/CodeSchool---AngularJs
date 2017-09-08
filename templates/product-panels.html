@@ -1,0 +1,67 @@
+<div class="gallery" ng-show="product.images.length" ng-controller="GalleryController as gallery">
+  <img class="gallery__current" ng-src="{{product.images[gallery.current]}}" />
+  <ul class="gallery__content" ng-show="false">
+    <li class="gallery__image" class="" ng-repeat="image in product.images">
+      <img ng-src="{{image}}" />
+    </li>
+  </ul>
+</div>
+<!-- End Gallery -->
+<div class="panel" ng-controller="PanelController as panel">
+  <ul class="panel__nav">
+    <li class="panel__nav-item" ng-class="{ active: panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+    <li class="panel__nav-item" ng-class="{ active: panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specification</a></li>
+    <li class="panel__nav-item" ng-class="{ active: panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
+  </ul>
+
+  <div class="panel__tab" ng-show="panel.isSelected(1)">
+    <h4>Description</h4>
+    <p>{{product.description}}</p>
+  </div>
+  <div class="panel__tab" ng-show="panel.isSelected(2)">
+    <h4>Specification</h4>
+    <p>{{product.description}}</p>
+  </div>
+  <div class="panel__tab" ng-show="panel.isSelected(3)">
+    <h4>Reviews</h4>
+    <ul>
+      <li class="reviews__item" ng-repeat="review in product.reviews">
+        <blockquote>
+          <strong>{{review.stars}} Stars</strong>
+          {{review.body}}
+          <cite class="clearfix">- {{review.author}} on {{ reviewCtrl.onCreated | date }}</cite>
+        </blockquote>
+      </li>
+    </ul>
+    <!--  Review Form -->
+    <form class="reviewForm" name="reviewForm"
+          ng-controller="ReviewController as reviewCtrl"
+          ng-submit="reviewForm.$valid && reviewCtrl.addReview(product)" novalidate>
+      <!--  Live Preview -->
+      <blockquote>
+        <strong>{{reviewCtrl.review.stars}} Stars</strong>
+        {{reviewCtrl.review.body}}
+        <cite>- {{reviewCtrl.review.author}}</cite>
+      </blockquote>
+
+      <!--  Review Form -->
+      <h4 class="reviewForm__title">Submit a Review</h4>
+      <fieldset>
+        <select class="reviewForm__stars" ng-model="reviewCtrl.review.stars"  ng-options="stars for stars in [5,4,3,2,1]"  title="Stars" required>
+          <option value="">Rate the Product</option>
+        </select>
+      </fieldset>
+      <fieldset>
+        <textarea class="reviewForm__body" ng-model="reviewCtrl.review.body" placeholder="Write a short review of the product..." title="Review" required></textarea>
+      </fieldset>
+      <fieldset>
+        <input class="reviewForm__author" ng-model="reviewCtrl.review.author" type="email" placeholder="jimmyDean@example.org" title="Email" required/>
+      </fieldset>
+      <fieldset>
+        <input class="reviewForm__submit" type="submit" class="btn btn-primary pull-right" value="Submit Review"  />
+      </fieldset>
+    </form>
+
+  </div>
+  <!-- End Panels -->
+</div>
