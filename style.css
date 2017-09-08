@@ -31,7 +31,7 @@ body {
 
 .product {
   width: 33%;
-  padding: 30px;
+  padding: 0 0 30px;
   -webkit-box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.3);
           box-shadow: 0px 0px 10px 1px rgba(128, 128, 128, 0.3); }
   .product__name {
@@ -42,11 +42,11 @@ body {
         -ms-flex-pack: justify;
             justify-content: space-between;
     font-size: 1em;
-    padding: 0 20px 10px 50px;
     padding: 20px;
     background: rgba(128, 128, 128, 0.2); }
 
 .panel__nav {
+  background: rgba(128, 128, 128, 0.2);
   width: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -54,9 +54,7 @@ body {
   -ms-flex-pack: distribute;
       justify-content: space-around; }
   .panel__nav-item {
-    margin: 5px;
-    border-radius: 10px;
-    background: grey; }
+    text-align: center; }
     .panel__nav-item a {
       display: block;
       padding: .3rem;
@@ -126,7 +124,8 @@ input, textarea, select {
   font-size: 1rem; }
 
 .active {
-  background: red; }
+  color: brown;
+  font-size: 1.2rem; }
 
 input.ng-invalid.ng-dirty, textarea.ng-invalid.ng-dirty, select.ng-invalid.ng-dirty {
   -webkit-box-shadow: 0px 0px 3px 0px red;
