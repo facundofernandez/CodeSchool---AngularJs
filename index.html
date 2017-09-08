@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
+  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+  <title>Document</title>
+</head>
+<body >
+  <div id="app" ng-controller="StoreController as store">
+
+    <div class="product" ng-repeat="product in store.products">
+      <h3 class="product__name">
+        {{product.name}}
+        <em class="product__price">{{product.price  | currency}}</em>
+      </h3>
+      <div class="gallery" ng-show="product.images.length" ng-controller="GalleryController as gallery">
+        <img class="gallery__current" ng-src="{{product.images[gallery.current]}}" />
+        <ul class="gallery__content" ng-show="false">
+          <li class="gallery__image" class="" ng-repeat="image in product.images">
+            <img ng-src="{{image}}" />
+          </li>
+        </ul>
+      </div>
+      <!-- End Gallery -->
+      <div class="panel" ng-controller="PanelController as panel">
+        <ul class="panel__nav">
+          <li class="panel__nav-item" ng-class="{ active: panel.isSelected(1)}"><a href ng-click="panel.selectTab(1)">Description</a></li>
+          <li class="panel__nav-item" ng-class="{ active: panel.isSelected(2)}"><a href ng-click="panel.selectTab(2)">Specification</a></li>
+          <li class="panel__nav-item" ng-class="{ active: panel.isSelected(3)}"><a href ng-click="panel.selectTab(3)">Reviews</a></li>
+        </ul>
+
+        <div class="panel__tab" ng-show="panel.isSelected(1)">
+          <h4>Description</h4>
+          <p>{{product.description}}</p>
+        </div>
+        <div class="panel__tab" ng-show="panel.isSelected(2)">
+          <h4>Specification</h4>
+          <p>{{product.description}}</p>
+        </div>
+        <div class="panel__tab" ng-show="panel.isSelected(3)">
+          <h4>Reviews</h4>
+          <ul>
+            <li class="reviews__item" ng-repeat="review in product.reviews">
+              <blockquote>
+                <strong>{{review.stars}} Stars</strong>
+                {{review.body}}
+                <cite class="clearfix">—{{review.author}}</cite>
+              </blockquote>
+            </li>
+          </ul>
+          <!--  Review Form -->
+          <form name="reviewForm"
+            ng-controller="ReviewController as reviewCtrl"
+            ng-submit="reviewCtrl.addReview(product)">
+            <!--  Live Preview -->
+            <blockquote>
+              <strong>{{reviewCtrl.review.stars}} Stars</strong>
+              {{reviewCtrl.review.body}}
+              <cite class="clearfix">—{{reviewCtrl.review.author}}</cite>
+            </blockquote>
+
+            <!--  Review Form -->
+            <h4>Submit a Review</h4>
+            <fieldset class="form-group">
+              <select class="form-control" ng-model="reviewCtrl.review.stars"  ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
+                <option value="">Rate the Product</option>
+              </select>
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea ng-model="reviewCtrl.review.body" class="form-control" placeholder="Write a short review of the product..." title="Review"></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+              <input ng-model="reviewCtrl.review.author" type="email" class="form-control" placeholder="jimmyDean@example.org" title="Email" />
+            </fieldset>
+            <fieldset class="form-group">
+              <input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+            </fieldset>
+          </form>
+
+        </div>
+        <!-- End Panels -->
+      </div>
+    <!-- End Product -->
+    </div>
+  </div>
+  <!-- End App -->
+  <script src="main.js"></script>
+  <script src="controladores/StoreController.js"></script>
+  <script src="controladores/PanelController.js"></script>
+  <script src="controladores/GalleryController.js"></script>
+  <script src="controladores/ReviewController.js"></script>
+</body>
+</html>
