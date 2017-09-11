@@ -1,7 +1,9 @@
 var gulp          = require('gulp'),
     sass          = require('gulp-sass'),
     autoprefixer  = require('gulp-autoprefixer'),
-    rename        = require('gulp-rename');
+    rename        = require('gulp-rename'),
+    concat        = require('gulp-concat'),
+    uglify        = require('gulp-uglify'),
     browserSync   = require('browser-sync').create(),
     reload        = browserSync.reload;
 
@@ -12,7 +14,7 @@ gulp.task('server', function(){
     });
 
     gulp.watch("*.html").on('change', reload);
-    gulp.watch("**/*.js").on('change', reload);
+    gulp.watch("**/*.js",['js']);
     gulp.watch('sass/*.*',['sass']);
 });
 
@@ -23,6 +25,16 @@ gulp.task('html',function(){
     .pipe(browserSync.stream());
 
     return stream;
+});
+
+gulp.task('js', function(){
+  let stream = gulp.src(['main.js','controladores/*.js','directives/*.js'])
+    .pipe(concat('main.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('.'))
+    .pipe(browserSync.stream());
+
+  return stream;
 });
 
 gulp.task('sass',function(){
@@ -36,4 +48,4 @@ gulp.task('sass',function(){
     return stream;
 })
 
-gulp.task('default', ['sass','server']);
+gulp.task('default', ['sass','server','js']);
